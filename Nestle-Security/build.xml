@@ -1,19 +1,22 @@
+
+
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
-<project basedir="." default="build" name="Nestle-Security">
+Any modifications will be overwritten.
+To include a user specific buildfile here, simply create one in the same
+directory with the processing instruction <?eclipse.ant.import?>
+as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="Duck">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../Downloads/eclipse"/>
+    <property name="ECLIPSE_HOME" value="../../../../usr/lib64/eclipse"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
-    <path id="Nestle-Security.classpath">
+    <path id="Duck.classpath">
         <pathelement location="bin"/>
-        <pathelement location="../../../Downloads/selenium-server-standalone-2.34.0.jar"/>
-        <pathelement location="../../../Downloads/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar"/>
+        <pathelement location="../../Documents/selenium-server-standalone-2.38.0.jar"/>
+        <pathelement location="../../../../usr/share/eclipse/dropins/junit-4.11.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -32,9 +35,9 @@
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
             <src path="src"/>
-            <classpath refid="Nestle-Security.classpath"/>
+            <classpath refid="Duck.classpath"/>
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
@@ -50,21 +53,37 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
-   </target>
+    </target>
+    <target name="HomeAflac">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.duck.tests.HomeAflac" todir="${junit.output.dir}"/>
+            <classpath refid="Duck.classpath"/>
+        </junit>
+    </target>
+<target name="VideoPopAflac">
+<mkdir dir="${junit.output.dir}"/>
+<junit fork="yes" printsummary="withOutAndErr">
+<formatter type="xml"/>
+<test name="com.duck.tests.VideoPopAflac" todir="${junit.output.dir}"/>
+<classpath refid="Duck.classpath"/>
+</junit>
+</target>
     <target name="SuccessRegMain">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="com.performance.testsuite.SuccessRegMain"/>
+            <test name="com.performance.testsuite.SuccessRegMain" todir="${junit.output.dir}"/>
             <classpath refid="Nestle-Security.classpath"/>
         </junit>
     </target>
-    
-    
-    <target name="NegativeRegistration">
-        <java classname="com.performance.testsuite.NegativeRegistration" failonerror="true" fork="yes">
-            <classpath refid="Nestle-Security.classpath"/>
-        </java>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
-   
 </project>
