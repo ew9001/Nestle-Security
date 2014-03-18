@@ -26,7 +26,7 @@ public class SuccessRegMain {
   static String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
   @Test
-  public void test() throws Exception {
+  public void TestRun() throws Exception {
 	  
 
     
