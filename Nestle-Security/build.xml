@@ -61,4 +61,9 @@
             <classpath refid="Nestle-Security.classpath"/>
         </java>
     </target>
+    <dependency>
+<groupId>org.seleniumhq.selenium</groupId>
+ <artifactId>selenium-api</artifactId>
+<version>2.26.0</version>
+</dependency>
 </project>
