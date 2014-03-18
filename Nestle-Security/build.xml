@@ -50,12 +50,17 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
-    </target>
+  
     <target name="SuccessRegMain">
-        <java classname="com.performance.testsuite.SuccessRegMain" failonerror="true" fork="yes">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.performance.testsuite.SuccessRegMain"/>
             <classpath refid="Nestle-Security.classpath"/>
-        </java>
+        </junit>
     </target>
+    
+    
     <target name="NegativeRegistration">
         <java classname="com.performance.testsuite.NegativeRegistration" failonerror="true" fork="yes">
             <classpath refid="Nestle-Security.classpath"/>
